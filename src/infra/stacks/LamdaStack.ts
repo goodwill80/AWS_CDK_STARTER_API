@@ -6,16 +6,20 @@ import {
   Runtime,
 } from 'aws-cdk-lib/aws-lambda';
 import { join } from 'path';
+import { LambdaIntegration } from 'aws-cdk-lib/aws-apigateway';
 
 export class LamdaStack extends Stack {
+  public readonly helloLamdaIntergration: LambdaIntegration;
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
     // Lamda function for hello get
-    new LamdaFunction(this, 'HelloLamda', {
+    const helloLamda = new LamdaFunction(this, 'HelloLamda', {
       runtime: Runtime.NODEJS_18_X,
       handler: 'hello.main',
       code: Code.fromAsset(join(__dirname, '..', '..', 'services')),
     });
+
+    this.helloLamdaIntergration = new LambdaIntegration(helloLamda);
   }
 }
