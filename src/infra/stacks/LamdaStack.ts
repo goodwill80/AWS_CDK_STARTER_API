@@ -7,10 +7,15 @@ import {
 } from 'aws-cdk-lib/aws-lambda';
 import { join } from 'path';
 import { LambdaIntegration } from 'aws-cdk-lib/aws-apigateway';
+import { ITable } from 'aws-cdk-lib/aws-dynamodb';
+
+interface LamdaStackProps extends StackProps {
+  spacesTable: ITable;
+}
 
 export class LamdaStack extends Stack {
   public readonly helloLamdaIntergration: LambdaIntegration;
-  constructor(scope: Construct, id: string, props?: StackProps) {
+  constructor(scope: Construct, id: string, props: LamdaStackProps) {
     super(scope, id, props);
 
     // Lamda function for hello get
@@ -18,6 +23,9 @@ export class LamdaStack extends Stack {
       runtime: Runtime.NODEJS_18_X,
       handler: 'hello.main',
       code: Code.fromAsset(join(__dirname, '..', '..', 'services')),
+      environment: {
+        TABLE_NAME: props.spacesTable.tableName,
+      },
     });
 
     this.helloLamdaIntergration = new LambdaIntegration(helloLamda);

@@ -4,8 +4,10 @@ import { LamdaStack } from './stacks/LamdaStack';
 import { ApiStack } from './stacks/ApiStack';
 
 const app = new App();
-new DataStack(app, 'DataStack');
-const lamdaStack = new LamdaStack(app, 'LamdaStack');
+const dataStack = new DataStack(app, 'DataStack');
+const lamdaStack = new LamdaStack(app, 'LamdaStack', {
+  spacesTable: dataStack.spacesTable,
+});
 new ApiStack(app, 'ApiStack', {
   helloLamdaIntergration: lamdaStack.helloLamdaIntergration,
 });
