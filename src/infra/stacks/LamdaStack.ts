@@ -8,6 +8,7 @@ import {
 import { join } from 'path';
 import { LambdaIntegration } from 'aws-cdk-lib/aws-apigateway';
 import { ITable } from 'aws-cdk-lib/aws-dynamodb';
+import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 
 interface LamdaStackProps extends StackProps {
   spacesTable: ITable;
@@ -19,10 +20,19 @@ export class LamdaStack extends Stack {
     super(scope, id, props);
 
     // Lamda function for hello get
-    const helloLamda = new LamdaFunction(this, 'HelloLamda', {
+    // const helloLamda = new LamdaFunction(this, 'HelloLamda', {
+    //   runtime: Runtime.NODEJS_18_X,
+    //   handler: 'hello.main',
+    //   code: Code.fromAsset(join(__dirname, '..', '..', 'services')),
+    //   environment: {
+    //     TABLE_NAME: props.spacesTable.tableName,
+    //   },
+    // });
+    // Using NodejsFunction
+    const helloLamda = new NodejsFunction(this, 'HelloLambda', {
       runtime: Runtime.NODEJS_18_X,
-      handler: 'hello.main',
-      code: Code.fromAsset(join(__dirname, '..', '..', 'services')),
+      handler: 'handler',
+      entry: join(__dirname, '..', '..', 'services', 'hello.ts'),
       environment: {
         TABLE_NAME: props.spacesTable.tableName,
       },
