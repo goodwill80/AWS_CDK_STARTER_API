@@ -5,7 +5,7 @@ POST https://s9f68dhdnl.execute-api.ap-southeast-1.amazonaws.com/prod/spaces
 content-type: application/json 
 
 {
-    "location": "Paris"
+    "location": "Bolivia",
 }
 ###
 

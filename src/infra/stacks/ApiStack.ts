@@ -11,11 +11,12 @@ export class ApiStack extends Stack {
   constructor(scope: Construct, id: string, props: ApiStackProps) {
     super(scope, id, props);
 
-    // GET Spaces
     const api = new RestApi(this, "SpacesApi");
     const spacesResource = api.root.addResource("spaces"); // this is the route
     spacesResource.addMethod("GET", props.spacesLamdaIntergration); // GET Method
     spacesResource.addMethod("POST", props.spacesLamdaIntergration); // POST Method
+    spacesResource.addMethod("DELETE", props.spacesLamdaIntergration); // DELETE Method
+    spacesResource.addMethod("PUT", props.spacesLamdaIntergration); // DELETE Method
   }
 }
 

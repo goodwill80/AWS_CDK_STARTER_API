@@ -26,7 +26,6 @@ export class LamdaStack extends Stack {
       runtime: Runtime.NODEJS_18_X,
       handler: "handler",
       entry: join(__dirname, "..", "..", "services", "spaces", "handler.ts"),
-
       environment: {
         TABLE_NAME: props.spacesTable.tableName,
       },
