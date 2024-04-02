@@ -37,7 +37,13 @@ export class LamdaStack extends Stack {
       new PolicyStatement({
         effect: Effect.ALLOW,
         resources: [props.spacesTable.tableArn],
-        actions: ["dynamodb:PutITem"],
+        actions: [
+          "dynamodb:DeleteItem",
+          "dynamodb:GetItem",
+          "dynamodb:PutItem",
+          "dynamodb:Scan",
+          "dynamodb:UpdateItem",
+        ],
       })
     );
 

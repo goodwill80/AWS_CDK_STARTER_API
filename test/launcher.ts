@@ -1,3 +1,18 @@
-import { handler } from "../src/services/hello";
+import { AnyRecord } from "dns";
+import { handler } from "../src/services/spaces/handler";
 
-handler({} as any, {} as any);
+process.env.AWS_REGION = "ap-southeast-1";
+process.env.TABLE_NAME = "SpaceTable-021149a4371f";
+
+handler(
+  {
+    httpMethod: "GET",
+    queryStringParameters: {
+      id: "6770e619-a712-45b4-883b-bd88a6f4b04c",
+    },
+    // body: JSON.stringify({
+    //     location: "Singapore",
+    // }),
+  } as any,
+  {} as any
+);

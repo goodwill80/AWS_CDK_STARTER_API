@@ -7,6 +7,7 @@ export async function postSpaces(
   docClient: DynamoDBClient
 ): Promise<APIGatewayProxyResult> {
   const randomID = v4();
+  // Body passed sent from client
   const item = JSON.parse(event.body);
   item.id = randomID;
   // Post item to DynamoDB via lambda handler
