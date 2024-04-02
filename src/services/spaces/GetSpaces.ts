@@ -3,6 +3,7 @@ import {
   GetItemCommand,
   ScanCommand,
 } from "@aws-sdk/client-dynamodb";
+import { unmarshall } from "@aws-sdk/util-dynamodb";
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 
 export async function getSpaces(
@@ -25,9 +26,10 @@ export async function getSpaces(
         })
       );
       if (getItemResponse.Item) {
+        const unmarsalledITem = unmarshall(getItemResponse.Item);
         return {
           statusCode: 200,
-          body: JSON.stringify(getItemResponse.Item),
+          body: JSON.stringify(unmarsalledITem),
         };
       } else {
         return {
@@ -50,8 +52,11 @@ export async function getSpaces(
     })
   );
   console.log(result.Items);
+  const unmarshalledItems = result.Items?.map((item) => {
+    return unmarshall(item);
+  });
   return {
     statusCode: 201,
-    body: JSON.stringify(result.Items),
+    body: JSON.stringify(unmarshalledItems),
   };
 }

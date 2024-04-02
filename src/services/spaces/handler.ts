@@ -13,7 +13,7 @@ async function handler(
   event: APIGatewayProxyEvent,
   context: Context
 ): Promise<APIGatewayProxyResult> {
-  let message: string;
+  // let message: string;
 
   try {
     switch (event.httpMethod) {
@@ -36,12 +36,12 @@ async function handler(
     };
   }
 
-  const response: APIGatewayProxyResult = {
-    statusCode: 200,
-    body: JSON.stringify(message),
-  };
+  // const response: APIGatewayProxyResult = {
+  //   statusCode: 200,
+  //   body: JSON.stringify(message),
+  // };
 
-  return response;
+  // return response;
 }
 
 export { handler };
