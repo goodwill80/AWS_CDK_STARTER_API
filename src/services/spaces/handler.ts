@@ -6,6 +6,7 @@ import {
 } from "aws-lambda";
 import { postSpaces } from "./PostSpaces";
 import { getSpaces } from "./GetSpaces";
+import { updateSpace } from "./UpdateSpace";
 
 const docClient = new DynamoDBClient({});
 
@@ -25,6 +26,9 @@ async function handler(
         const postResponse = await postSpaces(event, docClient);
         return postResponse;
         break;
+      case "PUT":
+        const putResponse = await updateSpace(event, docClient);
+        return putResponse;
       default:
         break;
     }

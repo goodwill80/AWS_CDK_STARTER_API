@@ -11,3 +11,11 @@ content-type: application/json
 
 GET https://s9f68dhdnl.execute-api.ap-southeast-1.amazonaws.com/prod/spaces?id=6770e619-a712-45b4-883b-bd88a6f4b04c
 ###
+
+PUT https://s9f68dhdnl.execute-api.ap-southeast-1.amazonaws.com/prod/spaces?id=6770e619-a712-45b4-883b-bd88a6f4b04c
+content-type: application/json 
+
+{
+    "location": "Paris2"
+}
+###
