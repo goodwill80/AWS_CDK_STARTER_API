@@ -32,6 +32,15 @@ export class LamdaStack extends Stack {
       },
     });
 
+    // To allow this lambda to perform write function into dynamo DB
+    spacesLambda.addToRolePolicy(
+      new PolicyStatement({
+        effect: Effect.ALLOW,
+        resources: [props.spacesTable.tableArn],
+        actions: ["dynamodb:PutITem"],
+      })
+    );
+
     this.spacesLamdaIntergration = new LambdaIntegration(spacesLambda);
   }
 }
