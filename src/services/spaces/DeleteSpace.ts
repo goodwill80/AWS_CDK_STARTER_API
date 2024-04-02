@@ -4,17 +4,27 @@ import {
   GetItemCommand,
   ScanCommand,
   UpdateItemCommand,
-} from "@aws-sdk/client-dynamodb";
+} from '@aws-sdk/client-dynamodb';
 // import { unmarshall } from "@aws-sdk/util-dynamodb";
-import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
+import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
+import { hasAdminGroup } from '../shared/Utils';
 
 export async function deleteSpace(
   event: APIGatewayProxyEvent,
   docClient: DynamoDBClient
 ): Promise<APIGatewayProxyResult> {
+  // Check if user belongs to admin group
+  const isAuthorised = hasAdminGroup(event);
+  if (!isAuthorised) {
+    return {
+      statusCode: 401,
+      body: JSON.stringify('Not authorised'),
+    };
+  }
+
   // If there is queryStringParameters and a request body
-  if (event.queryStringParameters && "id" in event.queryStringParameters) {
-    const spaceId = event.queryStringParameters["id"];
+  if (event.queryStringParameters && 'id' in event.queryStringParameters) {
+    const spaceId = event.queryStringParameters['id'];
 
     await docClient.send(
       new DeleteItemCommand({
@@ -33,7 +43,7 @@ export async function deleteSpace(
 
   return {
     statusCode: 400,
-    body: JSON.stringify("Please provide right args!!"),
+    body: JSON.stringify('Please provide right args!!'),
   };
 }
 
