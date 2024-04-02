@@ -37,31 +37,13 @@ export async function deleteSpace(
   };
 }
 
-// ALTERNATIVE METHOD - using docClient.put(item: PutItemInput).promised()
-// if (errorOrHasCompleted.result) {
-//           // use put item, to replace existing item
-//           const replaceItem: PutItemInput = {
-//             TableName: tableName,
-//             Item: model as PutItemInputAttributeMap,
-//             ConditionExpression:
-//               "PK = :pk1 AND SK = :sk1 AND docVersion = :lastVersion",
-//             ExpressionAttributeValues: {
-//               ":pk1": model.GetPartitionKey,
-//               ":sk1": model.GetSortKey,
-//               ":lastVersion": model.GetDocVersion - 1,
-//             },
-//             ReturnValues: "ALL_OLD",
-//           };
-
-//           try {
-//             // replace item by PK and SK
-//             await this.docClient.put(replaceItem).promise();
-//           } catch (error) {
-//             return new customError(
-//               RetryAction.NO_RETRY,
-//               ErrorTypeEnums.ExternalLibraryError.AWS_PUTITEM_ERROR,
-//               "Update aborted. AWS DynamoDb Error",
-//               error as AWSError,
-//               replaceItem
-//             );
-//           }
+// ALTERNATIVE METHOD - using docClient.delete(item: DeleteItemInput).promised()
+// const deleteItem: DeleteItemInput = {
+//         TableName: tableName,
+//         Key: {
+//           PK: model.GetPartitionKey,
+//           SK: model.GetSortKey,
+//         },
+//       };
+//
+// await this.docClient.delete(deleteItem).promise();

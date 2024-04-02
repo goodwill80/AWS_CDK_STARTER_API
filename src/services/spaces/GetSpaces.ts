@@ -60,3 +60,17 @@ export async function getSpaces(
     body: JSON.stringify(unmarshalledItems),
   };
 }
+
+// ALTERNATIVE
+// const queryItem: QueryInput = {
+//   TableName: tableName,
+//   KeyConditionExpression: "PK = :pk1 AND SK = :sk1",
+//   ExpressionAttributeValues: {
+//     ":pk1": model.GetPartitionKey,
+//     ":sk1": model.GetSortKey,
+//   },
+// };
+
+// const queryExistingItemResult: QueryOutput = await this.docClient
+//   .query(queryItem)
+//   .promise();

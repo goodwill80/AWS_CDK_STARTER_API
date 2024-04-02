@@ -26,3 +26,16 @@ export async function postSpaces(
     body: JSON.stringify(result),
   };
 }
+
+// ALTERNATIVE
+// const createItem: PutItemInput = {
+//   TableName: tableName,
+//   Item: model as PutItemInputAttributeMap,
+//   ConditionExpression: "PK <> :pk1 AND SK <> :sk1",
+//   ExpressionAttributeValues: {
+//     ":pk1": model.GetPartitionKey,
+//     ":sk1": model.GetSortKey,
+//   },
+// };
+
+// await this.docClient.put(createItem).promise();
