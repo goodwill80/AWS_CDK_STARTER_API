@@ -6,6 +6,12 @@ export class MissingFieldError extends Error {
   }
 }
 
+export class JsonError extends Error {
+  constructor(message: string) {
+    super(message);
+  }
+}
+
 // This function will check if a requestBody or responseBody will have the required fields based on predefined interface in Model
 // If no, then it will throw an error
 export function validateAsSpaceEntry(arg: any) {

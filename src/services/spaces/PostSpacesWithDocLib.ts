@@ -3,6 +3,7 @@ import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { marshall } from "@aws-sdk/util-dynamodb";
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import { v4 } from "uuid";
+import { parseJSON } from "../shared/Utils";
 
 export async function postSpacesWithDoc(
   event: APIGatewayProxyEvent,
@@ -13,7 +14,7 @@ export async function postSpacesWithDoc(
   // Get random ID
   const randomID = v4();
   // Body passed sent from client
-  const item = JSON.parse(event.body);
+  const item = parseJSON(event.body);
   item.id = randomID;
   // Post item to DynamoDB via lambda handler
   const result = await ddDocClient.send(

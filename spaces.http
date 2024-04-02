@@ -1,0 +1,24 @@
+
+GET https://s9f68dhdnl.execute-api.ap-southeast-1.amazonaws.com/prod/spaces
+###
+POST https://s9f68dhdnl.execute-api.ap-southeast-1.amazonaws.com/prod/spaces
+content-type: application/json 
+
+{
+    "name": "South America"
+}
+###
+
+GET https://s9f68dhdnl.execute-api.ap-southeast-1.amazonaws.com/prod/spaces?id=62012253-79bb-4531-b9a7-c5ccaf60b5cc
+###
+
+PUT https://s9f68dhdnl.execute-api.ap-southeast-1.amazonaws.com/prod/spaces?id=62012253-79bb-4531-b9a7-c5ccaf60b5cc
+content-type: application/json 
+
+{
+    "name": "An Economically rich country"
+}
+###
+
+DELETE https://s9f68dhdnl.execute-api.ap-southeast-1.amazonaws.com/prod/spaces?id=30aec52a-9a93-49da-9001-5cca7936e1ef
+###
