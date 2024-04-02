@@ -15,43 +15,43 @@ interface LamdaStackProps extends StackProps {
   spacesTable: ITable;
 }
 
+// Here is where you initialise the Lamda function by defining your DB and Handler function
 export class LamdaStack extends Stack {
-  public readonly helloLamdaIntergration: LambdaIntegration;
+  public readonly spacesLamdaIntergration: LambdaIntegration;
   constructor(scope: Construct, id: string, props: LamdaStackProps) {
     super(scope, id, props);
 
-    // Lamda function for hello get
-
-    // const helloLamda = new LamdaFunction(this, 'HelloLamda', {
-    //   runtime: Runtime.NODEJS_18_X,
-    //   handler: 'hello.main',
-    //   code: Code.fromAsset(join(__dirname, '..', '..', 'services')),
-
-    //   environment: {
-    //     TABLE_NAME: props.spacesTable.tableName,
-    //   },
-    // });
-
     // Using NodejsFunction
-    const helloLamda = new NodejsFunction(this, "HelloLambda", {
+    const spacesLambda = new NodejsFunction(this, "SpacesLambda", {
       runtime: Runtime.NODEJS_18_X,
       handler: "handler",
-      entry: join(__dirname, "..", "..", "services", "hello.ts"),
+      entry: join(__dirname, "..", "..", "services", "spaces", "handler.ts"),
 
       environment: {
         TABLE_NAME: props.spacesTable.tableName,
       },
     });
 
-    // Add IAM role policy to lambda to allow list all buckets actions
-    helloLamda.addToRolePolicy(
-      new PolicyStatement({
-        effect: Effect.ALLOW,
-        actions: ["s3:ListAllMyBuckets", "s3:ListBucket"],
-        resources: ["*"],
-      })
-    );
-
-    this.helloLamdaIntergration = new LambdaIntegration(helloLamda);
+    this.spacesLamdaIntergration = new LambdaIntegration(spacesLambda);
   }
 }
+
+// Alternative using LamdaFunction instead of NodejsFunction
+// const helloLamda = new LamdaFunction(this, 'HelloLamda', {
+//   runtime: Runtime.NODEJS_18_X,
+//   handler: 'hello.main',
+//   code: Code.fromAsset(join(__dirname, '..', '..', 'services')),
+
+//   environment: {
+//     TABLE_NAME: props.spacesTable.tableName,
+//   },
+// });
+
+// Add IAM role policy to lambda to allow list all buckets actions
+// helloLamda.addToRolePolicy(
+//   new PolicyStatement({
+//     effect: Effect.ALLOW,
+//     actions: ["s3:ListAllMyBuckets", "s3:ListBucket"],
+//     resources: ["*"],
+//   })
+// );

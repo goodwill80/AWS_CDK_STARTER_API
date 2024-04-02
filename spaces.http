@@ -1,3 +1,5 @@
 
-GET https://kg35f85f22.execute-api.ap-southeast-1.amazonaws.com/prod/spaces
+GET https://s9f68dhdnl.execute-api.ap-southeast-1.amazonaws.com/prod/spaces
+###
+POST https://s9f68dhdnl.execute-api.ap-southeast-1.amazonaws.com/prod/spaces
 ###

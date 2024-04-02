@@ -3,6 +3,7 @@ import { AttributeType, ITable, Table } from "aws-cdk-lib/aws-dynamodb";
 import { Construct } from "constructs";
 import { getSuffixFromStack } from "../Utils";
 
+// Here is where you defined and initialise the Dynomo DB table by setting the name, PK, SK...
 export class DataStack extends Stack {
   public readonly spacesTable: ITable;
   constructor(scope: Construct, id: string, props?: StackProps) {
