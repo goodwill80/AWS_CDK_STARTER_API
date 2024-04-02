@@ -1,2 +1,2 @@
-GET https://ytrb4ztm38.execute-api.ap-southeast-1.amazonaws.com/prod/spaces
+GET https://ytrb4ztm38.execute-api.ap-southeast-1.amazonaws.com/prod/sayhello
 ###
