@@ -19,3 +19,6 @@ content-type: application/json
     "location": "Paris2"
 }
 ###
+
+DELETE https://s9f68dhdnl.execute-api.ap-southeast-1.amazonaws.com/prod/spaces?id=6770e619-a712-45b4-883b-bd88a6f4b04c
+###

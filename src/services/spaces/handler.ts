@@ -7,6 +7,7 @@ import {
 import { postSpaces } from "./PostSpaces";
 import { getSpaces } from "./GetSpaces";
 import { updateSpace } from "./UpdateSpace";
+import { deleteSpace } from "./DeleteSpace";
 
 const docClient = new DynamoDBClient({});
 
@@ -29,6 +30,9 @@ async function handler(
       case "PUT":
         const putResponse = await updateSpace(event, docClient);
         return putResponse;
+      case "DELETE":
+        const deleteResponse = await deleteSpace(event, docClient);
+        return deleteResponse;
       default:
         break;
     }

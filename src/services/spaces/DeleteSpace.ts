@@ -1,4 +1,5 @@
 import {
+  DeleteItemCommand,
   DynamoDBClient,
   GetItemCommand,
   ScanCommand,
@@ -7,48 +8,26 @@ import {
 // import { unmarshall } from "@aws-sdk/util-dynamodb";
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 
-export async function updateSpace(
+export async function deleteSpace(
   event: APIGatewayProxyEvent,
   docClient: DynamoDBClient
 ): Promise<APIGatewayProxyResult> {
   // If there is queryStringParameters and a request body
-  if (
-    event.queryStringParameters &&
-    "id" in event.queryStringParameters &&
-    event.body
-  ) {
-    const parseBody = JSON.parse(event.body); // *** Important - need to parse request body before extract the values
+  if (event.queryStringParameters && "id" in event.queryStringParameters) {
     const spaceId = event.queryStringParameters["id"];
-    const requestBodyKey = Object.keys(parseBody)[0];
-    const requestBodyValue = parseBody[requestBodyKey];
 
-    const updateResult = await docClient.send(
-      new UpdateItemCommand({
-        // a. Define table name
+    await docClient.send(
+      new DeleteItemCommand({
         TableName: process.env.TABLE_NAME,
         Key: {
           id: { S: spaceId },
         },
-        // b. Set the pattern of key and value
-        UpdateExpression: "set #xxxkey = :value",
-        // c. Here we specify that we want to replace the value of this key with the new value in requestBodyValue
-        ExpressionAttributeValues: {
-          ":value": {
-            S: requestBodyValue,
-          },
-        },
-        ExpressionAttributeNames: {
-          "#xxxkey": requestBodyKey,
-        },
-
-        // d. specify the return values - UPDATED_NEW would provide us the values of what is being updated
-        ReturnValues: "UPDATED_NEW",
       })
     );
 
     return {
       statusCode: 200,
-      body: JSON.stringify(updateResult.Attributes),
+      body: JSON.stringify(`Deleted space with ID: ${spaceId}`),
     };
   }
 
