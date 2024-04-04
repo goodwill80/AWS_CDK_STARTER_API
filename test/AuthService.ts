@@ -8,9 +8,9 @@ import { fromCognitoIdentityPool } from "@aws-sdk/credential-providers";
 // import { CognitoAuthTokens } from "@aws-amplify/auth/dist/esm/providers/cognito/tokenProvider/types";
 // import { UserPool } from "aws-cdk-lib/aws-cognito";
 
-const userPoolId = "XXXXXXX";
-const UserPoolClientId = "XXXXXXXX";
-const identityPoolId = "XXXXXXX";
+const userPoolId = "ap-southeast-1_aYY1jWJWI";
+const UserPoolClientId = "11vaq395nm5liio0e34c1n3q48";
+const identityPoolId = "ap-southeast-1:9de2ef39-da6e-4b5c-a6c2-18cfe3f7d555";
 
 // Initialise Amplify API to communicate with AWS cognito - by passing in userPoolID and userIdentityPoolId
 Amplify.configure({

@@ -19,3 +19,7 @@ AWS Congito - comprise of 2 core function
 
 1. User Pools - store user data and perform basic athentication using JWT (2 ways of creating userpool - in aws console or using cdk)
 2. Identity Pools - Fined grained identity control which allow a user to assume an identity. It also can be directly called via AWS SDK commands
+
+Specifying an output file command
+
+1. "cdk deploy -all --outputs-file outputs.json

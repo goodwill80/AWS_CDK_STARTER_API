@@ -2,8 +2,8 @@ import { fetchAuthSession } from "@aws-amplify/auth";
 import { AuthService } from "./AuthService";
 import { ListBucketsCommand, S3Client } from "@aws-sdk/client-s3";
 
-const username = "xxxxx";
-const password = "xxxxx^";
+const username = "jonathan";
+const password = "iLuvu80^";
 
 async function testAuth() {
   const service = new AuthService();
