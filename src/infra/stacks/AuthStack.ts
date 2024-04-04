@@ -29,10 +29,10 @@ export class AuthStack extends Stack {
     super(scope, id, props);
 
     this.createUserPool(); // Create user pool for authentication
-    this.createUserPoolClient(); // Client for user pool
+    this.createUserPoolClient(); // Client to communicate with user pool
     this.createIdentityPool(); // Setting rights to different users i.e. authenticated and unauthenticated
     this.createRole(); // Used for creating different roles
-    this.attachRoles();
+    this.attachRoles(); // Attached all roles created to identity pool
     this.createAdminGroup(); // Add users as admin
   }
 
@@ -160,6 +160,7 @@ export class AuthStack extends Stack {
 
   // Attach Roles Created
   private attachRoles() {
+    // pass in the identity pool ref, then specify authenticated and unauthenticated role Arn
     new CfnIdentityPoolRoleAttachment(this, "RolesAttachment", {
       identityPoolId: this.identifyPool.ref,
       roles: {
