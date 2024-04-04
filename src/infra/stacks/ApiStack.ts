@@ -1,13 +1,13 @@
-import { Stack, StackProps } from 'aws-cdk-lib';
+import { Stack, StackProps } from "aws-cdk-lib";
 import {
   AuthorizationType,
   CognitoUserPoolsAuthorizer,
   LambdaIntegration,
   MethodOptions,
   RestApi,
-} from 'aws-cdk-lib/aws-apigateway';
-import { Construct } from 'constructs';
-import { IUserPool, UserPool } from 'aws-cdk-lib/aws-cognito';
+} from "aws-cdk-lib/aws-apigateway";
+import { Construct } from "constructs";
+import { IUserPool, UserPool } from "aws-cdk-lib/aws-cognito";
 
 interface ApiStackProps extends StackProps {
   spacesLamdaIntergration: LambdaIntegration;
@@ -19,15 +19,15 @@ export class ApiStack extends Stack {
   constructor(scope: Construct, id: string, props: ApiStackProps) {
     super(scope, id, props);
 
-    const api = new RestApi(this, 'SpacesApi');
+    const api = new RestApi(this, "SpacesApi");
 
     // initialize CognitoUserPoolsAuthorizer
     const authorizer = new CognitoUserPoolsAuthorizer(
       this,
-      'SpaceApiAuthorizer',
+      "SpaceApiAuthorizer",
       {
         cognitoUserPools: [props.userPool],
-        identitySource: 'method.request.header.Authorization',
+        identitySource: "method.request.header.Authorization",
       }
     );
 
@@ -42,27 +42,27 @@ export class ApiStack extends Stack {
       },
     };
 
-    const spacesResource = api.root.addResource('spaces'); // this is the route
+    const spacesResource = api.root.addResource("spaces"); // this is the route
     spacesResource.addMethod(
-      'GET',
-      props.spacesLamdaIntergration,
-      optionsWithAuth
+      "GET",
+      props.spacesLamdaIntergration, //Linked with Lambda function
+      optionsWithAuth // authorization
     ); // GET Method
     spacesResource.addMethod(
-      'POST',
+      "POST",
       props.spacesLamdaIntergration,
       optionsWithAuth
     ); // POST Method
     spacesResource.addMethod(
-      'DELETE',
+      "DELETE",
       props.spacesLamdaIntergration,
       optionsWithAuth
     ); // DELETE Method
     spacesResource.addMethod(
-      'PUT',
+      "PUT",
       props.spacesLamdaIntergration,
       optionsWithAuth
-    ); // DELETE Method
+    ); // PUT Method
   }
 }
 
