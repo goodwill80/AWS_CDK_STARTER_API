@@ -27,7 +27,7 @@ export class UIDeploymentStack extends Stack {
       "..",
       "..",
       "..",
-      "AWS_CDK_START_API_CLIENT",
+      "space-finder-frontend",
       "dist"
     );
 
