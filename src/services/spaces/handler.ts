@@ -9,6 +9,7 @@ import { getSpaces } from "./GetSpaces";
 import { updateSpace } from "./UpdateSpace";
 import { deleteSpace } from "./DeleteSpace";
 import { JsonError, MissingFieldError } from "../shared/DataValidator";
+import { addCORsHeader } from "../shared/Utils";
 
 const docClient = new DynamoDBClient({});
 
@@ -17,23 +18,24 @@ async function handler(
   context: Context
 ): Promise<APIGatewayProxyResult> {
   // let message: string;
+  let apiResponse: APIGatewayProxyResult;
 
   try {
     switch (event.httpMethod) {
       case "GET":
         const getResponse = await getSpaces(event, docClient);
-        return getResponse;
+        apiResponse = getResponse;
         break;
       case "POST":
         const postResponse = await postSpaces(event, docClient);
-        return postResponse;
+        apiResponse = postResponse;
         break;
       case "PUT":
         const putResponse = await updateSpace(event, docClient);
-        return putResponse;
+        apiResponse = putResponse;
       case "DELETE":
         const deleteResponse = await deleteSpace(event, docClient);
-        return deleteResponse;
+        apiResponse = deleteResponse;
       default:
         break;
     }
@@ -62,6 +64,9 @@ async function handler(
   // };
 
   // return response;
+
+  addCORsHeader(apiResponse);
+  return apiResponse;
 }
 
 export { handler };

@@ -22,4 +22,4 @@ AWS Congito - comprise of 2 core function
 
 Specifying an output file command
 
-1. "cdk deploy -all --outputs-file outputs.json
+1. "cdk deploy -all --outputs-file outputs.json"

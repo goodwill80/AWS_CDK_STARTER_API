@@ -2,8 +2,10 @@ import { Stack, StackProps } from "aws-cdk-lib";
 import {
   AuthorizationType,
   CognitoUserPoolsAuthorizer,
+  Cors,
   LambdaIntegration,
   MethodOptions,
+  ResourceOptions,
   RestApi,
 } from "aws-cdk-lib/aws-apigateway";
 import { Construct } from "constructs";
@@ -34,7 +36,7 @@ export class ApiStack extends Stack {
     // Attached the api to it
     authorizer._attachToApi(api);
 
-    // Create option param
+    // Create options with authorisation params - ADD to specific Methods which require authorization
     const optionsWithAuth: MethodOptions = {
       authorizationType: AuthorizationType.COGNITO,
       authorizer: {
@@ -42,7 +44,15 @@ export class ApiStack extends Stack {
       },
     };
 
-    const spacesResource = api.root.addResource("spaces"); // this is the route
+    // Create options with CORs params - ADD to API RESOURCE
+    const optionsWithCORs: ResourceOptions = {
+      defaultCorsPreflightOptions: {
+        allowOrigins: Cors.ALL_ORIGINS,
+        allowMethods: Cors.ALL_METHODS,
+      },
+    };
+
+    const spacesResource = api.root.addResource("spaces", optionsWithCORs); // this is the route
     spacesResource.addMethod(
       "GET",
       props.spacesLamdaIntergration, //Linked with Lambda function
