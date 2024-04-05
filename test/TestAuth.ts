@@ -31,7 +31,7 @@ async function testAuth() {
   // return idToken;
 
   const buckets = await listBuckets(credentials);
-  // console.log(buckets);
+  console.log(buckets);
   return buckets;
 }
 

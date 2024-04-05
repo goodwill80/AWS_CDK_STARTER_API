@@ -27,7 +27,7 @@ export class UIDeploymentStack extends Stack {
       "..",
       "..",
       "..",
-      "space-finder-frontend",
+      "SAMPLE_REACT_TEMPLATE_FOR_AWS",
       "dist"
     );
 

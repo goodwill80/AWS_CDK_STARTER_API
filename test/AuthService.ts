@@ -5,12 +5,11 @@ import {
   GetCredentialsForIdentityCommand,
 } from "@aws-sdk/client-cognito-identity";
 import { fromCognitoIdentityPool } from "@aws-sdk/credential-providers";
-// import { CognitoAuthTokens } from "@aws-amplify/auth/dist/esm/providers/cognito/tokenProvider/types";
-// import { UserPool } from "aws-cdk-lib/aws-cognito";
 
-const userPoolId = "ap-southeast-1_aYY1jWJWI";
-const UserPoolClientId = "11vaq395nm5liio0e34c1n3q48";
-const identityPoolId = "ap-southeast-1:9de2ef39-da6e-4b5c-a6c2-18cfe3f7d555";
+// Outdated
+const userPoolId = "ap-southeast-1_ZpwsT6ke8";
+const UserPoolClientId = "5nfq1nbb1msr5avv13fe0528an";
+const identityPoolId = "ap-southeast-1:2b3fb289-779a-4df8-acd9-71a7a3d49894";
 
 // Initialise Amplify API to communicate with AWS cognito - by passing in userPoolID and userIdentityPoolId
 Amplify.configure({
@@ -45,7 +44,7 @@ export class AuthService {
   ) {
     try {
       // const jwtToken = user.accessToken as JWT;
-      const cognitoIdentityPool = `cognito-idp.${awsRegion}.amazonaws.com/ap-southeast-1_aYY1jWJWI`;
+      const cognitoIdentityPool = `cognito-idp.${awsRegion}.amazonaws.com/ap-southeast-1_ZpwsT6ke8`;
 
       const cognitoIdentity = new CognitoIdentityClient({
         credentials: fromCognitoIdentityPool({
