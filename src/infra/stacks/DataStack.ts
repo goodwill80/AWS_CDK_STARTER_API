@@ -24,7 +24,7 @@ export class DataStack extends Stack {
       tableName: `SpaceTable-${suffix}`,
     });
 
-    // Initialised Photo S3 Bucket
+    // Initialised Photo S3 Bucket - We need to configure the policy in auth stack when creating roles - please see createRoles() in authStack
     this.photosBucket = new Bucket(this, "SpaceFinder-Photos", {
       bucketName: `space-finder-photos-${suffix}`,
       cors: [
