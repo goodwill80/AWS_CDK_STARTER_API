@@ -10,7 +10,9 @@ const dataStack = new DataStack(app, "DataStack");
 const lamdaStack = new LamdaStack(app, "LamdaStack", {
   spacesTable: dataStack.spacesTable,
 });
-const authStack = new AuthStack(app, "AuthStack");
+const authStack = new AuthStack(app, "AuthStack", {
+  photosBucket: dataStack.photosBucket,
+});
 new ApiStack(app, "ApiStack", {
   spacesLamdaIntergration: lamdaStack.spacesLamdaIntergration,
   userPool: authStack.userPool,
